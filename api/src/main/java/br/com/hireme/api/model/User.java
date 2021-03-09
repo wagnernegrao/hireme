@@ -25,17 +25,6 @@ public class User implements Serializable {
     @Column(name = "service_provider")
     private boolean isServiceProvider;
 
-    public User() {
-    }
-
-    public User(String email, String password, byte[] photo, boolean isContractor, boolean isServiceProvider) {
-        this.email = email;
-        this.password = password;
-        this.photo = photo;
-        this.isContractor = isContractor;
-        this.isServiceProvider = isServiceProvider;
-    }
-
     public Long getId() {
         return id;
     }

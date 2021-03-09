@@ -21,10 +21,7 @@ public class ServiceProvider implements Serializable {
     @Column(name = "phone_number")
     private String phoneNumber;
     @Column(name = "ability")
-    private List<String> ability;
-
-    public ServiceProvider() {
-    }
+    private String ability;
 
     public ServiceProvider(Long id) {
         this.id = id;
@@ -70,11 +67,11 @@ public class ServiceProvider implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public List<String> getAbility() {
+    public String getAbility() {
         return ability;
     }
 
-    public void setAbility(List<String> ability) {
+    public void setAbility(String ability) {
         this.ability = ability;
     }
 }
