@@ -1,9 +1,11 @@
 package br.com.hireme.api.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Contractor {
+@Table(name = "contractor")
+public class Contractor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
