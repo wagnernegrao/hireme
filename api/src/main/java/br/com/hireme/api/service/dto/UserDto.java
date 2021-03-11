@@ -2,11 +2,13 @@ package br.com.hireme.api.service.dto;
 
 import br.com.hireme.api.model.User;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class UserDto {
 
     private Long id;
     private String email;
-    private String password;
     private byte[] photo;
     private boolean isContractor;
     private boolean isServiceProvider;
@@ -14,7 +16,6 @@ public class UserDto {
     public UserDto(User user) {
         this.id = user.getId();
         this.email = user.getEmail();
-        this.password = user.getPassword();
         this.photo = user.getPhoto();
         this.isContractor = user.isContractor();
         this.isServiceProvider = user.isServiceProvider();
@@ -35,14 +36,6 @@ public class UserDto {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public byte[] getPhoto() {
@@ -67,5 +60,9 @@ public class UserDto {
 
     public void setServiceProvider(boolean serviceProvider) {
         isServiceProvider = serviceProvider;
+    }
+
+    public static List<UserDto> toDto(List<User> users) {
+        return users.stream().map(UserDto::new).collect(Collectors.toList());
     }
 }
