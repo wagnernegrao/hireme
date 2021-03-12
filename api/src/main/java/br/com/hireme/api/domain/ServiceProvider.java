@@ -1,8 +1,7 @@
-package br.com.hireme.api.model;
+package br.com.hireme.api.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "service_provider")

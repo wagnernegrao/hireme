@@ -1,4 +1,4 @@
-package br.com.hireme.api.model;
+package br.com.hireme.api.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,8 +10,9 @@ public class Contractor implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "user_id")
-    private Long userId;
+    @OneToOne(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User userId;
     @Column(name = "name")
     private String name;
     @Column(name = "cnpj")
@@ -27,11 +28,11 @@ public class Contractor implements Serializable {
         this.id = id;
     }
 
-    public Long getUserId() {
+    public User getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
 

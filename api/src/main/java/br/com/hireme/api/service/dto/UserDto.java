@@ -1,6 +1,6 @@
 package br.com.hireme.api.service.dto;
 
-import br.com.hireme.api.model.User;
+import br.com.hireme.api.domain.User;
 
 import java.util.List;
 import java.util.stream.Collectors;

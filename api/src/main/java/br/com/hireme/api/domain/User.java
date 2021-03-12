@@ -1,4 +1,4 @@
-package br.com.hireme.api.model;
+package br.com.hireme.api.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
