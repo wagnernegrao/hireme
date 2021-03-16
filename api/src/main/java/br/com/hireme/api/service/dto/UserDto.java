@@ -19,7 +19,6 @@ public class UserDto {
         this.photo = user.getPhoto();
         this.isContractor = user.isContractor();
         this.isServiceProvider = user.isServiceProvider();
-
     }
 
     public Long getId() {
@@ -60,10 +59,6 @@ public class UserDto {
 
     public void setServiceProvider(boolean serviceProvider) {
         isServiceProvider = serviceProvider;
-    }
-
-    public static List<UserDto> toDto(List<User> users) {
-        return users.stream().map(UserDto::new).collect(Collectors.toList());
     }
 
     public static UserDto toDto(User user) {
