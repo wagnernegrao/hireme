@@ -4,21 +4,28 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "contractor")
+@Table(name = "contratante")
 public class Contractor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @OneToOne(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "usuario_id")
     private User userId;
-    @Column(name = "name")
+    @Column(name = "nome")
     private String name;
     @Column(name = "cnpj")
     private Long cnpj;
-    @Column(name = "address")
+    @Column(name = "endereco")
     private String address;
+
+    public Contractor(User userId, String name, Long cnpj, String address) {
+        this.userId = userId;
+        this.name = name;
+        this.cnpj = cnpj;
+        this.address = address;
+    }
 
     public Long getId() {
         return id;

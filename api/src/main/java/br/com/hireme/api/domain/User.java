@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user")
+@Table(name = "usuario")
 public class User implements Serializable {
 
     @Id
@@ -15,15 +15,25 @@ public class User implements Serializable {
     private Long id;
     @Column(name = "email")
     private String email;
-    @Column(name = "password")
+    @Column(name = "senha")
     private String password;
     @Lob
-    @Column(name = "photo")
+    @Column(name = "foto")
     private byte[] photo;
-    @Column(name = "contractor")
+    @Column(name = "contratante")
     private boolean isContractor;
-    @Column(name = "service_provider")
+    @Column(name = "prestador_servico")
     private boolean isServiceProvider;
+
+    public User() {}
+
+    public User(String email, String password, byte[] photo, boolean isContractor, boolean isServiceProvider) {
+        this.email = email;
+        this.password = password;
+        this.photo = photo;
+        this.isContractor = isContractor;
+        this.isServiceProvider = isServiceProvider;
+    }
 
     public Long getId() {
         return id;

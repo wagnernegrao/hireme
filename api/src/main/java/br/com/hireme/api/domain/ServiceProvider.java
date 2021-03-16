@@ -4,22 +4,22 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "service_provider")
+@Table(name = "prestador_servico")
 public class ServiceProvider implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "user_id")
+    @Column(name = "usuario_id")
     private User userId;
-    @Column(name = "first_name")
+    @Column(name = "primeiro_nome")
     private String firstName;
-    @Column(name = "last_name")
+    @Column(name = "ultimo_nome")
     private String lastName;
-    @Column(name = "phone_number")
+    @Column(name = "numero_telefone")
     private String phoneNumber;
-    @Column(name = "ability")
+    @Column(name = "habilidade")
     private String ability;
 
     public ServiceProvider(Long id) {

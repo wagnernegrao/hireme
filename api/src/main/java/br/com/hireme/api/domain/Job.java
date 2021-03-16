@@ -4,18 +4,18 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "job")
+@Table(name = "emprego")
 public class Job implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "contractor_id")
+    @Column(name = "contratante_id")
     private Contractor contractorId;
-    @Column(name = "title")
+    @Column(name = "titulo")
     private String title;
-    @Column(name = "description")
+    @Column(name = "descricao")
     private String description;
     @Column(name = "status")
     private boolean status;
