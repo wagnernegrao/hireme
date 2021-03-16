@@ -1,6 +1,7 @@
 package br.com.hireme.api.handler;
 
 import br.com.hireme.api.handler.exception.ErrorDetails;
+import br.com.hireme.api.handler.exception.NotAcceptableException;
 import br.com.hireme.api.handler.exception.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,22 @@ public class RestExceptionHandler {
                 request.getDescription(false));
 
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
+
+    @ExceptionHandler(NotAcceptableException.class)
+    public ResponseEntity<Object> handlerResourceNotAcceptableException(NotAcceptableException exception, WebRequest request) {
+
+        ErrorDetails errorDetails = new ErrorDetails(
+                ZonedDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.name(),
+                "Not Acceptable, Check the Documentation",
+                exception.getMessage(),
+                exception.getClass().getName(),
+                request.getDescription(false));
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_ACCEPTABLE);
     }
 
 }
