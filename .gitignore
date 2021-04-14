@@ -12,6 +12,8 @@
 
 # Folder
 target/
+.idea
+/.idea
 
 # Package Files #
 *.jar
