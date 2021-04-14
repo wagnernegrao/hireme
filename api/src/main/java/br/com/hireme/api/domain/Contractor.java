@@ -10,17 +10,18 @@ public class Contractor implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @OneToOne(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "usuario_id")
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private User userId;
     @Column(name = "nome")
     private String name;
     @Column(name = "cnpj")
-    private Long cnpj;
+    private String cnpj;
     @Column(name = "endereco")
     private String address;
 
-    public Contractor(User userId, String name, Long cnpj, String address) {
+    public Contractor(){}
+    public Contractor(User userId, String name, String cnpj, String address) {
         this.userId = userId;
         this.name = name;
         this.cnpj = cnpj;
@@ -39,31 +40,50 @@ public class Contractor implements Serializable {
         return userId;
     }
 
+
     public void setUserId(User userId) {
         this.userId = userId;
     }
+
 
     public String getName() {
         return name;
     }
 
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public Long getCnpj() {
+
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(Long cnpj) {
+
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
+
 
     public String getAddress() {
         return address;
     }
 
+
     public void setAddress(String address) {
         this.address = address;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Contractor {" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", name='" + name + '\'' +
+                ", cnpj=" + cnpj +
+                ", address='" + address + '\'' +
+                '}';
     }
 }
