@@ -13,7 +13,12 @@
 # Folder
 target/
 .idea
+.idea/
 /.idea
+.idea/
+
+#file
+api.iml
 
 # Package Files #
 *.jar
