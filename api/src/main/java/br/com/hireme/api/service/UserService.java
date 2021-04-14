@@ -4,6 +4,7 @@ import br.com.hireme.api.domain.User;
 import br.com.hireme.api.service.dto.UserDto;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     /*
@@ -24,4 +25,8 @@ public interface UserService {
     * */
     User save(User user);
 
+    /*
+     * Find by email of user
+     * */
+    Optional<User> findByEmail();
 }
