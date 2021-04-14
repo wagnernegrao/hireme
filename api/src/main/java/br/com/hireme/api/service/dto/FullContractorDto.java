@@ -3,22 +3,28 @@ package br.com.hireme.api.service.dto;
 import br.com.hireme.api.domain.Contractor;
 import br.com.hireme.api.domain.User;
 
-public class ContractorDto {
+import java.util.Arrays;
+import java.util.Objects;
+
+public class FullContractorDto {
 
     private Long id;
     private String name;
-    private String email;
     private byte[] photo;
-    private Long cnpj;
+    private String email;
+    private String cnpj;
     private String address;
 
-    public ContractorDto(User user, Contractor contractor) {
-        this.id = contractor.getId();
-        this.name = contractor.getName();
-        this.email = user.getEmail();
-        this.photo = user.getPhoto();
-        this.cnpj = contractor.getCnpj();
-        this.address = contractor.getAddress();
+    public FullContractorDto() {
+    }
+
+    public FullContractorDto(Long id, String name, byte[] photo, String email, String cnpj, String address) {
+        this.id = id;
+        this.name = name;
+        this.photo = photo;
+        this.email = email;
+        this.cnpj = cnpj;
+        this.address = address;
     }
 
     public Long getId() {
@@ -37,14 +43,6 @@ public class ContractorDto {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public byte[] getPhoto() {
         return photo;
     }
@@ -53,11 +51,19 @@ public class ContractorDto {
         this.photo = photo;
     }
 
-    public Long getCnpj() {
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(Long cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 
@@ -69,7 +75,22 @@ public class ContractorDto {
         this.address = address;
     }
 
-    public static ContractorDto toDto(User user, Contractor contractor) {
-        return new ContractorDto(user, contractor);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FullContractorDto that = (FullContractorDto) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Arrays.equals(photo, that.photo) && Objects.equals(email, that.email) && Objects.equals(cnpj, that.cnpj) && Objects.equals(address, that.address);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(id, name, email, cnpj, address);
+        result = 31 * result + Arrays.hashCode(photo);
+        return result;
+    }
+
+    public static FullContractorDto toDto(User u, Contractor c) {
+        return new FullContractorDto(c.getId(), c.getName(), u.getPhoto(), u.getEmail(), c.getCnpj(), c.getAddress());
     }
 }

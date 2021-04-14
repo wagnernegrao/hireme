@@ -4,24 +4,24 @@ import br.com.hireme.api.domain.User;
 
 import javax.persistence.Column;
 
-public class CreateContractorDto {
-    private User userId;
+public class ContractorDto {
+    private Long userId;
     private String name;
     private Long cnpj;
     private String address;
 
-    public CreateContractorDto(User userId, String name, Long cnpj, String address) {
+    public ContractorDto(Long userId, String name, Long cnpj, String address) {
         this.userId = userId;
         this.name = name;
         this.cnpj = cnpj;
         this.address = address;
     }
 
-    public User getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(User userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
