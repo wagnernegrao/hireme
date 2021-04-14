@@ -1,6 +1,7 @@
 package br.com.hireme.api.service.impl;
 
 import br.com.hireme.api.domain.User;
+import br.com.hireme.api.handler.exception.BadRequestException;
 import br.com.hireme.api.handler.exception.NotAcceptableException;
 import br.com.hireme.api.handler.exception.NotFoundException;
 import br.com.hireme.api.repository.ContractorRepository;
@@ -37,14 +38,21 @@ public class UserServiceImpl implements UserService {
     public User save(User user) {
         Optional<User> userEmail = userRepository.findByEmail(user.getEmail());
 
-        if (userEmail.isPresent()) userEmail.orElseThrow(() -> new NotAcceptableException("Not Acceptable, email in use " + userEmail.get().getEmail()));
+        if (userEmail.isPresent()){
+            throw new BadRequestException("Not Acceptable, email: " + userEmail.get().getEmail() + " in use");
+        }
 
         return userRepository.save(user);
     }
 
     @Override
+    public Optional<User> findByEmail() {
+        return Optional.empty();
+    }
+
+    @Override
     public List<UserDto> findAll() {
-        List<User> user = userRepository.findAll();
+        List<User> user = (List<User>) userRepository.findAll();
         return user.stream().map(UserDto::toDto).collect(Collectors.toList());
     }
 
