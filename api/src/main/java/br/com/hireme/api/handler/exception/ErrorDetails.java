@@ -1,6 +1,9 @@
 package br.com.hireme.api.handler.exception;
 
+import org.springframework.stereotype.Service;
+
 import java.time.ZonedDateTime;
+
 
 public class ErrorDetails {
 
