@@ -4,32 +4,28 @@ import br.com.hireme.api.domain.Contractor;
 import br.com.hireme.api.domain.User;
 import br.com.hireme.api.service.ContractorService;
 import br.com.hireme.api.service.UserService;
-import br.com.hireme.api.service.dto.UserContractorDto;
-import br.com.hireme.api.service.dto.UserDto;
-import br.com.hireme.api.service.dto.form.UserContractorForm;
+import br.com.hireme.api.service.dto.FullContractorDto;
+import br.com.hireme.api.service.dto.form.ContractorForm;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 
 
 @RestController
 @RequestMapping("/api/contractors")
-public class UserController {
-
+public class ContractorController {
     // usado para apresetar log
-    private Logger log = LoggerFactory.getLogger(UserController.class);
+    private Logger log = LoggerFactory.getLogger(ContractorController.class);
 
     @Autowired
     private ContractorService contractorService;
@@ -38,21 +34,26 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    @Operation(summary = "List all contractors paginated", description = "The default size is 20, use the parameter" +
-            "size to change the default value", tags = {"Contractor"})
-    public ResponseEntity<List<UserDto>> listAll(@ParameterObject Pageable pageable) {
+    @Operation(summary = "List all contractors paginated", description = "The default size is 20, use the parameter " +
+            "size to change the default value", tags = {"contractor"})
+    public ResponseEntity<Page<FullContractorDto>> listAll(@ParameterObject Pageable pageable) {
         log.debug("REST request to all users");
-        return ResponseEntity.ok().body(userService.findAll());
+
+        return ResponseEntity.ok().body(contractorService.allContractors(pageable));
     }
 
     @PostMapping
     @Transactional
-    public ResponseEntity<UserContractorDto> create(@Valid @RequestBody UserContractorForm userForm, UriComponentsBuilder builder) {
-        log.debug("REST request to userForm: {}", userForm);
-        User user = userService.save(userForm.toUser());
-        Contractor contractor = contractorService.save(userForm.toContractor(userService, user));
-        URI uri = builder.path("/api/users/{id}").buildAndExpand(contractor.getId()).toUri();
+    @Operation(summary = "Create a contractor", description = "Receive a form with data of user and contractor.",
+            tags = {"contractor"})
+    public ResponseEntity<FullContractorDto> create(@RequestBody ContractorForm form,
+                                                    UriComponentsBuilder builder) {
+        log.debug("REST request to userForm: {}", form);
 
-        return ResponseEntity.ok().body(new UserContractorDto(user, contractor));
+        User user = userService.save(form.toUser());
+        Contractor contractor = contractorService.save(form.toContractor(user));
+        URI uri = builder.path("/api/contractors/{id}").buildAndExpand(contractor.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new FullContractorDto().toDto(user, contractor));
     }
 }
