@@ -12,7 +12,7 @@ public interface ContractorService {
      * Return all contractors using fields of the user and contractor,
      * if the search returns none element, then return "No Content"
      * */
-    Page<FullContractorDto> allContractors(Pageable pageable);
+    Page<Contractor> findAll(Pageable pageable);
 
     Contractor findOne(Long id);
 
