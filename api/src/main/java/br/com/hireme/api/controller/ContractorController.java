@@ -36,10 +36,10 @@ public class ContractorController {
     @GetMapping
     @Operation(summary = "List all contractors paginated", description = "The default size is 20, use the parameter " +
             "size to change the default value", tags = {"contractor"})
-    public ResponseEntity<Page<FullContractorDto>> listAll(@ParameterObject Pageable pageable) {
+    public ResponseEntity<Page<Contractor>> listAll(@ParameterObject Pageable pageable) {
         log.debug("REST request to all users");
 
-        return ResponseEntity.ok().body(contractorService.allContractors(pageable));
+        return ResponseEntity.ok().body(contractorService.findAll(pageable));
     }
 
     @PostMapping
