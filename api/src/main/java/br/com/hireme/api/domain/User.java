@@ -20,19 +20,14 @@ public class User implements Serializable {
     @Lob
     @Column(name = "foto")
     private byte[] photo;
-    @Column(name = "contratante")
-    private boolean isContractor;
-    @Column(name = "prestador_servico")
-    private boolean isServiceProvider;
+
 
     public User() {}
 
-    public User(String email, String password, byte[] photo, boolean isContractor, boolean isServiceProvider) {
+    public User(String email, String password, byte[] photo) {
         this.email = email;
         this.password = password;
         this.photo = photo;
-        this.isContractor = isContractor;
-        this.isServiceProvider = isServiceProvider;
     }
 
     public Long getId() {
@@ -67,36 +62,28 @@ public class User implements Serializable {
         this.photo = photo;
     }
 
-    public boolean isContractor() {
-        return isContractor;
-    }
-
-    public void setContractor(boolean contractor) {
-        isContractor = contractor;
-    }
-
-    public boolean isServiceProvider() {
-        return isServiceProvider;
-    }
-
-    public void setServiceProvider(boolean serviceProvider) {
-        isServiceProvider = serviceProvider;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return isContractor == user.isContractor && isServiceProvider == user.isServiceProvider && Objects.equals(id, user.id) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Arrays.equals(photo, user.photo);
+        return Objects.equals(id, user.id) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Arrays.equals(photo, user.photo);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, email, password, isContractor, isServiceProvider);
+        int result = Objects.hash(id, email, password);
         result = 31 * result + Arrays.hashCode(photo);
         return result;
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", photo=" + Arrays.toString(photo) +
+                '}';
+    }
 }
