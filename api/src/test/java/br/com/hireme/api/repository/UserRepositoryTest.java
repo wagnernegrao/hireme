@@ -87,7 +87,7 @@ class UserRepositoryTest {
     @DisplayName("Delete user then successful")
     void shouldDeleteWhenSuccessful() {
         User user = new User("userToDelete@gmail.com", "12345",
-                "photo".getBytes(), true, false);
+                "photo".getBytes());
         User userSaved = this.userRepository.save(user);
         this.userRepository.delete(userSaved);
 
@@ -98,6 +98,6 @@ class UserRepositoryTest {
 
     private User createUser() {
         return new User("user@gmail.com", "12345",
-                "photo".getBytes(), true, false);
+                "photo".getBytes());
     }
 }
