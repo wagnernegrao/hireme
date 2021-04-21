@@ -22,8 +22,8 @@ public class ContractorServiceImpl implements ContractorService {
     ContractorRepository contractorRepository;
 
     @Override
-    public Page<FullContractorDto> allContractors(Pageable pageable) {
-        Page<FullContractorDto> page = contractorRepository.allContractors(pageable);
+    public Page<Contractor> findAll(Pageable pageable) {
+        Page<Contractor> page = contractorRepository.findAll(pageable);
 
         if (page.getNumberOfElements() == 0) {
             throw new NoContentException("The search returned no element");

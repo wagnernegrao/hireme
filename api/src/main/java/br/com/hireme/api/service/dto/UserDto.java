@@ -17,8 +17,6 @@ public class UserDto {
         this.id = user.getId();
         this.email = user.getEmail();
         this.photo = user.getPhoto();
-        this.isContractor = user.isContractor();
-        this.isServiceProvider = user.isServiceProvider();
     }
 
     public Long getId() {
@@ -43,22 +41,6 @@ public class UserDto {
 
     public void setPhoto(byte[] photo) {
         this.photo = photo;
-    }
-
-    public boolean isContractor() {
-        return isContractor;
-    }
-
-    public void setContractor(boolean contractor) {
-        isContractor = contractor;
-    }
-
-    public boolean isServiceProvider() {
-        return isServiceProvider;
-    }
-
-    public void setServiceProvider(boolean serviceProvider) {
-        isServiceProvider = serviceProvider;
     }
 
     public static UserDto toDto(User user) {

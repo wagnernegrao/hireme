@@ -1,5 +1,7 @@
 package br.com.hireme.api.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -11,7 +13,8 @@ public class Contractor implements Serializable {
     @Column(name = "id")
     private Long id;
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    @JoinColumn(name = "usuario_id")
+    @JsonIgnore
     private User userId;
     @Column(name = "nome")
     private String name;
@@ -20,7 +23,9 @@ public class Contractor implements Serializable {
     @Column(name = "endereco")
     private String address;
 
-    public Contractor(){}
+    public Contractor() {
+    }
+
     public Contractor(User userId, String name, String cnpj, String address) {
         this.userId = userId;
         this.name = name;
@@ -36,15 +41,9 @@ public class Contractor implements Serializable {
         this.id = id;
     }
 
-    public User getUserId() {
-        return userId;
-    }
-
-
     public void setUserId(User userId) {
         this.userId = userId;
     }
-
 
     public String getName() {
         return name;

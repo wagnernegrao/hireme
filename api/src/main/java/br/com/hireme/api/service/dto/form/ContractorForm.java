@@ -129,10 +129,10 @@ public class ContractorForm {
 
     public User toUser() {
         if (photo == null) {
-            return new User(email, password, null, isContractor, isServiceProvider);
+            return new User(email, password, null);
         }
 
-        return new User(email, password, photo.getBytes(), isContractor, isServiceProvider);
+        return new User(email, password, photo.getBytes());
     }
 
     public Contractor toContractor(User user) {

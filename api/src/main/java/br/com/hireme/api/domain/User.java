@@ -22,7 +22,8 @@ public class User implements Serializable {
     private byte[] photo;
 
 
-    public User() {}
+    public User() {
+    }
 
     public User(String email, String password, byte[] photo) {
         this.email = email;
