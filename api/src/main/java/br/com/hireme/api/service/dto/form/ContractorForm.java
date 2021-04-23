@@ -3,8 +3,6 @@ package br.com.hireme.api.service.dto.form;
 import br.com.hireme.api.domain.Contractor;
 import br.com.hireme.api.domain.User;
 import br.com.hireme.api.handler.exception.BadRequestException;
-import br.com.hireme.api.service.ContractorService;
-import br.com.hireme.api.service.UserService;
 import com.sun.istack.NotNull;
 
 import javax.validation.constraints.NotEmpty;
@@ -16,13 +14,7 @@ public class ContractorForm {
     @NotEmpty(message = "This field no can be empty")
     @NotNull
     private String password;
-    @NotEmpty(message = "This field no can be empty")
-    @NotNull
-    private boolean isContractor;
     private String photo;
-    @NotEmpty(message = "This field no can be empty")
-    @NotNull
-    private boolean isServiceProvider;
     @NotEmpty(message = "This field no can be empty")
     @NotNull
     private String name;
@@ -32,6 +24,15 @@ public class ContractorForm {
     @NotEmpty(message = "This field no can be empty")
     @NotNull
     private String address;
+
+    public ContractorForm(String email, String password, String photo, String name, String cnpj, String address) {
+        this.email = email;
+        this.password = password;
+        this.photo = photo;
+        this.name = name;
+        this.cnpj = cnpj;
+        this.address = address;
+    }
 
     public String getEmail() {
         return email;
@@ -56,22 +57,6 @@ public class ContractorForm {
 
     public void setPhoto(String photo) {
         this.photo = photo;
-    }
-
-    public boolean isContractor() {
-        return isContractor;
-    }
-
-    public void setContractor(boolean contractor) {
-        isContractor = contractor;
-    }
-
-    public boolean isServiceProvider() {
-        return isServiceProvider;
-    }
-
-    public void setServiceProvider(boolean serviceProvider) {
-        isServiceProvider = serviceProvider;
     }
 
     public String getName() {
