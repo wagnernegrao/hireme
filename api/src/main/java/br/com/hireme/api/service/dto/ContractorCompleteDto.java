@@ -6,7 +6,7 @@ import br.com.hireme.api.domain.User;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class FullContractorDto {
+public class ContractorCompleteDto {
 
     private Long id;
     private String name;
@@ -15,10 +15,9 @@ public class FullContractorDto {
     private String cnpj;
     private String address;
 
-    public FullContractorDto() {
-    }
+    public ContractorCompleteDto(){}
 
-    public FullContractorDto(Long id, String name, byte[] photo, String email, String cnpj, String address) {
+    public ContractorCompleteDto(Long id, String name, byte[] photo, String email, String cnpj, String address) {
         this.id = id;
         this.name = name;
         this.photo = photo;
@@ -79,7 +78,7 @@ public class FullContractorDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FullContractorDto that = (FullContractorDto) o;
+        ContractorCompleteDto that = (ContractorCompleteDto) o;
         return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Arrays.equals(photo, that.photo) && Objects.equals(email, that.email) && Objects.equals(cnpj, that.cnpj) && Objects.equals(address, that.address);
     }
 
@@ -90,7 +89,7 @@ public class FullContractorDto {
         return result;
     }
 
-    public static FullContractorDto toDto(User u, Contractor c) {
-        return new FullContractorDto(c.getId(), c.getName(), u.getPhoto(), u.getEmail(), c.getCnpj(), c.getAddress());
+    public static ContractorCompleteDto toDto(User u, Contractor c) {
+        return new ContractorCompleteDto(c.getId(), c.getName(), u.getPhoto(), u.getEmail(), c.getCnpj(), c.getAddress());
     }
 }
