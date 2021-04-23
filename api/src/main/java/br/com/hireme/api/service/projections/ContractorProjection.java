@@ -1,11 +1,16 @@
 package br.com.hireme.api.service.projections;
 
+import org.springframework.beans.factory.annotation.Value;
+
 public interface ContractorProjection {
 
     Long getId();
-    String getNome();
-    Byte[] getFoto();
+    @Value("#{target.nome}")
+    String getName();
+    @Value("#{target.foto}")
+    Byte[] getPhoto();
     String getEmail();
     String getCnpj();
-    String getEndereco();
+    @Value("#{target.endereco}")
+    String getAddress();
 }
