@@ -2,7 +2,7 @@ package br.com.hireme.api.service;
 
 import br.com.hireme.api.domain.Contractor;
 import br.com.hireme.api.handler.exception.NotAcceptableException;
-import br.com.hireme.api.service.dto.FullContractorDto;
+import br.com.hireme.api.service.dto.form.ContractorForm;
 import br.com.hireme.api.service.projections.ContractorProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,12 +14,10 @@ public interface ContractorService {
      * */
     Page<Contractor> findAll(Pageable pageable);
 
-    Contractor findOne(Long id);
-
     /*
-     * Save a contractor, but find if user already exists,
-     * if find a user then return Not Accepted,
-     * if not found then create a user.
+     * Receive the form then create a user, but verify if exists,
+     * and after create a contractor, but verify if exists.
+     * If exists in some case that already exists, then return Not Accepted.
      * */
-    Contractor save(Contractor contractor) throws NotAcceptableException;
+    ContractorProjection save(ContractorForm form) throws NotAcceptableException;
 }
