@@ -4,8 +4,10 @@ import br.com.hireme.api.domain.Contractor;
 import br.com.hireme.api.domain.User;
 import br.com.hireme.api.service.ContractorService;
 import br.com.hireme.api.service.UserService;
-import br.com.hireme.api.service.dto.FullContractorDto;
+import br.com.hireme.api.service.dto.ContractorCompleteDto;
 import br.com.hireme.api.service.dto.form.ContractorForm;
+import br.com.hireme.api.service.projections.ContractorProjection;
+import com.fasterxml.jackson.core.TreeNode;
 import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,14 +48,14 @@ public class ContractorController {
     @Transactional
     @Operation(summary = "Create a contractor", description = "Receive a form with data of user and contractor.",
             tags = {"contractor"})
-    public ResponseEntity<FullContractorDto> create(@RequestBody ContractorForm form,
-                                                    UriComponentsBuilder builder) {
+    public ResponseEntity<ContractorProjection> create(@RequestBody ContractorForm form) {
         log.debug("REST request to userForm: {}", form);
 
-        User user = userService.save(form.toUser());
-        Contractor contractor = contractorService.save(form.toContractor(user));
+        ContractorProjection contractor = contractorService.save(form);
+        UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
         URI uri = builder.path("/api/contractors/{id}").buildAndExpand(contractor.getId()).toUri();
 
-        return ResponseEntity.created(uri).body(new FullContractorDto().toDto(user, contractor));
+//        return ResponseEntity.ok().body(contractor);
+        return ResponseEntity.created(uri).body(contractor);
     }
 }
